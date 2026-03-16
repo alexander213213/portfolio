@@ -417,7 +417,7 @@ const coreFeatures = [
   {
     title: 'Guarded Task Lifecycle',
     desc: 'Tasks follow a strictly controlled lifecycle. State checks ensure tasks cannot skip stages or enter invalid states, preventing inconsistent behavior.',
-    points: ['OPEN → ASSIGNED → SUBMITTED → COMPLETED', 'OPEN → CANCELLED', 'ASSIGNED / SUBMITTED → OPEN'],
+    points: ['OPEN → ASSIGNED → SUBMITTED → COMPLETED', 'OPEN → CANCELLED'],
   },
   {
     title: 'Proposal System',
