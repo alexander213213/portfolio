@@ -3,7 +3,7 @@
 
     <nav class="sidebar-nav">
       <div class="nav-logo">
-        <span class="nav-logo-initials">AG</span>
+        <n-avatar :size="120" src="/profile.jpg"/>
       </div>
       <div class="nav-links">
         <a
@@ -515,6 +515,9 @@ const plannedItems = [
 }
 
 .nav-logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   padding: 0 24px 32px;
   border-bottom: 1px solid rgba(120, 123, 134, 0.1);
   margin-bottom: 24px;
