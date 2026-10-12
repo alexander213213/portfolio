@@ -8,7 +8,7 @@
         <div>
           <a href="#top" class="site-name">Alexander Gracilla</a>
           <nav class="desktop-nav" aria-label="Sections">
-            <a href="#project">Project</a>
+            <a href="#yapr">Projects</a>
             <a href="#stack">Stack</a>
             <a href="#experience">Experience</a>
             <a href="#contact">Contact</a>
@@ -27,7 +27,7 @@
     </header>
 
     <nav v-if="menuOpen" class="mobile-nav" aria-label="Sections mobile">
-      <a href="#project" @click="menuOpen = false">Project</a>
+      <a href="#yapr" @click="menuOpen = false">Projects</a>
       <a href="#stack" @click="menuOpen = false">Stack</a>
       <a href="#experience" @click="menuOpen = false">Experience</a>
       <a href="#contact" @click="menuOpen = false">Contact</a>
@@ -35,80 +35,117 @@
 
     <main id="top" class="content">
       <section class="block">
-        <h1>Who the hell am I?</h1>
+        <p class="kicker">Full-Stack Developer — Available for Remote Roles</p>
+        <h1>Hello, I'm Alexander Gracilla.</h1>
         <p>
-          I'm <strong>Alexander Gracilla</strong>, a full-stack developer based in the
-          Philippines (GMT+8), focused on backend architecture and predictable application workflows.
+          I'm a <strong>full-stack developer</strong> who specializes in <strong>backend systems</strong> —
+          the kind that stay correct under real-world use: encrypted protocols, guarded state
+          transitions, durable storage, and APIs with predictable behavior.
         </p>
         <p>
-          I build reliable web applications with
-          <strong>TypeScript, Node.js, PostgreSQL</strong>, and modern frontend frameworks like
-          <strong>Vue 3</strong>. I care about data integrity, guarded state transitions, and APIs
-          that behave the way you'd expect.
+          I design and ship with
+          <strong>TypeScript, Node.js, SQLite/PostgreSQL</strong>, and terminal + web frontends
+          (<strong>React Ink, Vue 3</strong>). I do my best work owning a system end to end, from
+          protocol design to production deployment.
         </p>
         <p>
-          Recently I built a <a href="#project"><strong>Task Marketplace platform</strong></a> —
-          post tasks, submit proposals, assign workers, and leave reviews. It's the project below.
+          My flagship project is <a href="#yapr"><strong>YAPR</strong></a> — an end-to-end encrypted
+          terminal messenger with its own relay server. Details below.
         </p>
         <p>
-          I'm open to remote junior backend and full-stack roles worldwide. The fastest way to reach
-          me is <a href="mailto:alexandergracilla@gmail.com"><strong>email</strong></a>, and all of
-          my code lives on <a href="https://github.com/alexander213213" target="_blank" rel="noreferrer"><strong>GitHub</strong></a>.
+          I also <strong>lead teams</strong>: for the past two years I've directed a small freelance
+          team, driving delivery, deployments, and client communication. The fastest way to reach me
+          is <a href="mailto:alexandergracilla@gmail.com"><strong>email</strong></a>; my work is on
+          <a href="https://github.com/alexander213213" target="_blank" rel="noreferrer"><strong>GitHub</strong></a>.
         </p>
       </section>
 
-      <section id="project" class="block">
-        <h1>Featured project</h1>
+      <section id="yapr" class="block">
+        <p class="kicker">Featured Project</p>
+        <h1>YAPR — End-to-End Encrypted Terminal Messenger</h1>
         <p>
-          <strong>Task Marketplace Platform</strong> — a simplified service marketplace where users
-          post tasks, workers submit proposals, owners assign a worker, and owners review the work
-          when it's done.
-        </p>
-        <p>
-          The interesting part isn't the UI, it's the rules underneath: strictly guarded task states
-          (<code>OPEN → ASSIGNED → SUBMITTED → COMPLETED</code>), transactional rating updates,
-          JWT auth with refresh rotation, Zod validation, and cursor-based pagination.
+          <strong>YAPR</strong> is a terminal messenger backed by a dedicated relay server that routes
+          <strong>only ciphertext</strong> and holds messages while recipients are offline. I designed
+          and built the full system across two repositories:
+          <a href="https://github.com/alexander213213/yapr" target="_blank" rel="noreferrer"><strong>yapr</strong></a>
+          (client) and
+          <a href="https://github.com/alexander213213/yapr-server" target="_blank" rel="noreferrer"><strong>yapr-server</strong></a>
+          (relay).
         </p>
         <ul class="plain-list">
-          <li><strong>Live frontend:</strong> <a href="https://tasker-demo.vercel.app" target="_blank" rel="noreferrer">tasker-demo.vercel.app</a></li>
-          <li><strong>Backend API:</strong> <a href="https://github.com/alexander213213/task-api" target="_blank" rel="noreferrer">github.com/alexander213213/task-api</a></li>
-          <li><strong>Frontend repo:</strong> <a href="https://github.com/alexander213213/task-front" target="_blank" rel="noreferrer">github.com/alexander213213/task-front</a></li>
-          <li><strong>Demo password:</strong> <code>Password123!</code></li>
+          <li><strong>Designed the encryption model:</strong> per-message X25519 + AES-256-GCM using stdlib only — pairwise per member in groups of up to 50.</li>
+          <li><strong>Built for reliability:</strong> persistent outbox with idempotent resends, offline inbox replay with paging, delivery acknowledgements and read receipts.</li>
+          <li><strong>Defined the protocol:</strong> TLS-only newline-delimited JSON (v2) with zod-validated frames and deduplication by <code>clientMessageId</code>.</li>
+          <li><strong>Hardened the server:</strong> scrypt hashing with constant-time comparison, token-bucket rate limits, 64KB frame cap, heartbeat and idle sweeps, structured logging.</li>
+          <li><strong>Made storage durable:</strong> <code>node:sqlite</code> in the OS data directory with automatic migrations and pre-migration backups.</li>
+          <li><strong>Shipped the terminal UI:</strong> React Ink sidebar, message threads, contacts browser, group administration, nicknames, history sharing, four themes, and a markup parser — backed by vitest suites.</li>
         </ul>
-        <p class="muted">How it flows: Post Task → Proposals → Assign Worker → Submit Work → Review.</p>
+        <p>
+          Getting started: <code>npm i -g @sprunkzzz/yapr</code> with a running
+          yapr-server over TLS. Full specification and setup guides are in the repositories.
+        </p>
+        <p class="meta">
+          <a href="https://github.com/alexander213213/yapr" target="_blank" rel="noreferrer">yapr repo</a>
+          ·
+          <a href="https://github.com/alexander213213/yapr-server" target="_blank" rel="noreferrer">yapr-server repo</a>
+        </p>
+      </section>
+
+      <section id="task-marketplace" class="block">
+        <p class="kicker">Additional Project</p>
+        <h1>Task Marketplace Platform</h1>
+        <p>
+          A service marketplace where clients post tasks, workers submit proposals, owners assign a
+          worker, and completed work is reviewed and rated. I built it around correctness: strictly
+          guarded task states
+          (<code>OPEN → ASSIGNED → SUBMITTED → COMPLETED</code>), transactional rating updates,
+          JWT authentication with refresh rotation, Zod-validated contracts, and cursor-based pagination.
+        </p>
+        <p class="meta">
+          <a href="https://tasker-demo.vercel.app" target="_blank" rel="noreferrer">Live frontend</a>
+          ·
+          <a href="https://github.com/alexander213213/task-api" target="_blank" rel="noreferrer">Backend API</a>
+          ·
+          <a href="https://github.com/alexander213213/task-front" target="_blank" rel="noreferrer">Frontend repo</a>
+          · Demo password: <code>Password123!</code>
+        </p>
       </section>
 
       <section id="stack" class="block">
-        <h1>What I use</h1>
+        <p class="kicker">Technical Skills</p>
+        <h1>Tools I work with</h1>
         <p>
-          Curious how I work? This is the stack I reach for, inspired by the whole
-          <em>uses</em>-page idea.
+          The stack behind YAPR and my marketplace work.
         </p>
         <ul class="plain-list">
-          <li><strong>Backend:</strong> Node.js, Express, TypeScript, REST APIs</li>
-          <li><strong>Frontend:</strong> Vue 3, TypeScript, Vite, HTML/CSS</li>
-          <li><strong>Database:</strong> PostgreSQL, Prisma ORM</li>
-          <li><strong>Infra &amp; tools:</strong> Railway, Vercel, Zod, Git, Vitest</li>
+          <li><strong>Backend:</strong> Node.js ≥ 22, TypeScript, Express, REST, TLS</li>
+          <li><strong>Frontend:</strong> React Ink (TUI), Vue 3, Vite, HTML/CSS</li>
+          <li><strong>Data:</strong> SQLite (<code>node:sqlite</code>), PostgreSQL, Prisma ORM</li>
+          <li><strong>Infra &amp; tools:</strong> Docker, Railway, Zod, Pino, Vitest, Git</li>
         </ul>
       </section>
 
       <section id="experience" class="block">
+        <p class="kicker">Experience</p>
         <h1>Background</h1>
         <p>
-          I'm a self-taught developer. For the past two years I've led a small freelance team —
-          building full-stack client apps, handling deploys, client communication, and project
-          coordination.
+          I'm a self-taught developer with two years of experience <strong>leading a small
+          freelance team</strong> — scoping work, coordinating delivery, managing client
+          communication, and shipping full-stack applications to production.
         </p>
         <p>
-          Most of that client work is private, but it gave me real production experience. Next up
-          on my roadmap: real-time updates via SSE, more test coverage, and deployment hardening.
+          YAPR is the public record of how I work: protocol and cryptography design, server
+          hardening, durable storage, terminal UI engineering, automated testing, and release
+          engineering across npm, Docker, and Railway.
         </p>
       </section>
 
       <section id="contact" class="block">
+        <p class="kicker">Contact</p>
         <h1>Get in touch</h1>
         <p>
-          Open to remote opportunities. Email me at
+          I am currently available for <strong>remote full-stack roles worldwide</strong>, with a
+          focus on backend systems. Email me at
           <a href="mailto:alexandergracilla@gmail.com"><strong>alexandergracilla@gmail.com</strong></a>
           or find me on
           <a href="https://github.com/alexander213213" target="_blank" rel="noreferrer"><strong>GitHub</strong></a>.
@@ -189,11 +226,12 @@ onMounted(() => {
 }
 
 .site-name {
+  font-family: var(--font-display);
   display: block;
-  font-weight: 800;
+  font-weight: 700;
   font-size: 1.25rem;
   line-height: 1.1;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.02em;
 }
 
 .desktop-nav {
@@ -204,6 +242,7 @@ onMounted(() => {
   letter-spacing: 0.08em;
   font-size: 0.75rem;
   font-weight: 600;
+  font-family: var(--font-mono);
 }
 
 .desktop-nav a {
@@ -223,9 +262,9 @@ onMounted(() => {
 }
 
 .theme-toggle {
-  font: inherit;
+  font-family: var(--font-mono);
   font-size: 0.75rem;
-  font-weight: 700;
+  font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.08em;
   color: var(--muted);
@@ -262,6 +301,7 @@ onMounted(() => {
   gap: 1.25rem;
   padding: 1.5rem 0.5rem;
   font-weight: 700;
+  font-family: var(--font-display);
 }
 
 .mobile-nav a {
@@ -273,23 +313,36 @@ onMounted(() => {
 }
 
 .block {
-  max-width: 28rem;
+  max-width: 36rem;
   margin-bottom: 3.5rem;
   scroll-margin-top: 2rem;
 }
 
+.kicker {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 0 0 0.5rem;
+}
+
 .block h1 {
-  font-size: 1.5rem;
-  font-weight: 800;
-  letter-spacing: -0.01em;
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 1.3rem + 1.5vw, 2.25rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
   margin: 0 0 1rem;
   color: var(--link);
+  text-wrap: balance;
 }
 
 .block p,
 .block ul {
-  font-size: 1.125rem;
-  line-height: 1.6;
+  font-size: 1.0625rem;
+  line-height: 1.75;
   color: var(--text);
 }
 
@@ -301,8 +354,10 @@ onMounted(() => {
 
 .block a {
   color: var(--link);
-  font-weight: 700;
+  font-weight: 600;
   text-decoration: none;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
 }
 
 .block a:hover {
@@ -314,7 +369,7 @@ onMounted(() => {
   padding-left: 1.25rem;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.6rem;
 }
 
 .plain-list li::marker {
@@ -322,17 +377,28 @@ onMounted(() => {
 }
 
 code {
-  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-  font-size: 0.95em;
+  font-family: var(--font-mono);
+  font-size: 0.875em;
   background: var(--code-bg);
   border: 1px solid var(--border);
-  border-radius: 4px;
-  padding: 0.1em 0.35em;
+  border-radius: 6px;
+  padding: 0.12em 0.4em;
+  white-space: nowrap;
+}
+
+.meta {
+  font-size: 0.95rem;
+}
+
+.meta a {
+  white-space: nowrap;
 }
 
 .muted {
+  font-family: var(--font-mono);
   color: var(--muted);
-  font-size: 1rem;
+  font-size: 0.85rem;
+  letter-spacing: 0.01em;
 }
 
 @media (min-width: 768px) {
@@ -361,7 +427,7 @@ code {
     width: 5rem;
   }
   .site-name {
-    font-size: 1.875rem;
+    font-size: clamp(1.5rem, 1.2rem + 1vw, 1.875rem);
   }
   .content {
     padding-left: 8rem;
