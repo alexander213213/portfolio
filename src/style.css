@@ -1,0 +1,50 @@
+:root,
+:root[data-theme='light'] {
+  --bg: #ffffff;
+  --text: #22292f;
+  --link: #000000;
+  --muted: #606f7b;
+  --border: #e8e8e8;
+  --code-bg: #f4f5f7;
+  color-scheme: light;
+}
+
+:root[data-theme='dark'] {
+  --bg: #0f1113;
+  --text: #c8cdd8;
+  --link: #ffffff;
+  --muted: #9aa0a8;
+  --border: #22262b;
+  --code-bg: #17191d;
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+#app {
+  min-height: 100vh;
+}
+
+a {
+  color: inherit;
+}
+
+img {
+  max-width: 100%;
+}
